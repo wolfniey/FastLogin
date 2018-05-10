@@ -139,7 +139,7 @@ public class VerifyResponseTask implements Runnable {
         try {
             Object networkManager = getNetworkManager();
             Field uuidField = FieldUtils.getField(networkManager.getClass(), "spoofedUUID");
-            Object oldValue = uuidField.get(player);
+            Object oldValue = uuidField.get(networkManager);
 
             plugin.getLog().info("spoofed UUID field exits? {} with {}", uuidField, oldValue);
         } catch (ReflectiveOperationException e) {
@@ -151,6 +151,9 @@ public class VerifyResponseTask implements Runnable {
                 Object networkManager = getNetworkManager();
                 //https://github.com/bergerkiller/CraftSource/blob/master/net.minecraft.server/NetworkManager.java#L69
                 FieldUtils.writeField(networkManager, "spoofedUUID", premiumUUID, true);
+
+                Object spoofedUUID = FieldUtils.readField(networkManager, "spoofedUUID", true);
+                plugin.getLog().info("Result after setting the spoofed field {}", spoofedUUID);
             } catch (Exception exc) {
                 plugin.getLog().error("Error setting premium uuid of {}", player, exc);
             }
