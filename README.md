@@ -1,3 +1,5 @@
+# This if the fork of original FastLogin with only one difference - support for Innocraft Aozora authentication plugin
+
 # FastLogin
 
 Checks if a Minecraft player has a paid account (premium). If so, they can skip offline authentication (auth plugins).
